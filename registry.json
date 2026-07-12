@@ -96,7 +96,8 @@
       "name": "app-shell",
       "type": "registry:block",
       "title": "Application Shell",
-      "description": "Responsive workspace shell with dense sidebar navigation and top bar.",
+      "description": "Responsive workspace shell with collapsible desktop navigation, mobile drawer and top bar.",
+      "dependencies": ["lucide-react"],
       "files": [{ "path": "registry/new-york/app-shell/app-shell.tsx", "type": "registry:component", "target": "@components/app-shell.tsx" }],
       "categories": ["dashboard", "navigation", "layout"]
     },
