@@ -1,15 +1,39 @@
 {
-  "name": "@bimfabrik/ui-system",
+  "name": "@bimfabrik/ui-theme",
   "version": "0.1.0",
-  "private": true,
-  "description": "BIMfabrik shadcn registry for restrained application, editorial and spatial interfaces.",
+  "private": false,
+  "description": "Shared BIMfabrik design tokens and base CSS for application, editorial and spatial interfaces.",
+  "license": "MIT",
+  "sideEffects": [
+    "*.css",
+    "styles/*.css"
+  ],
+  "files": [
+    "styles"
+  ],
+  "style": "./styles/index.css",
+  "exports": {
+    ".": "./styles/index.css",
+    "./tokens.css": "./styles/tokens.css",
+    "./base.css": "./styles/base.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BIMfabrik/ui-system.git"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "registry:build": "shadcn build"
+    "registry:build": "shadcn build",
+    "package:check": "npm pack --dry-run"
   },
   "dependencies": {
     "clsx": "^2.1.1",
