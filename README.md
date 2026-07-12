@@ -13,11 +13,31 @@ npx shadcn@latest add BIMfabrik/ui-system/page-header
 
 Public GitHub registry items can be installed directly from the repository. The hosted registry build is also prepared for GitHub Pages at `https://bimfabrik.github.io/ui-system/r/{name}.json`.
 
+## Add as a namespace
+
+Add this to an application's `components.json`:
+
+```json
+{
+  "registries": {
+    "@bimfabrik": "https://bimfabrik.github.io/ui-system/r/{name}.json"
+  }
+}
+```
+
+Then install with:
+
+```bash
+npx shadcn@latest add @bimfabrik/page-header
+```
+
 ## Local development
 
 ```bash
 npm install
 npm run registry:build
+npm run typecheck
+npm run build
 npm run dev
 ```
 
