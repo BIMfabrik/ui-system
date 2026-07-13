@@ -1,9 +1,22 @@
-import type { HTMLAttributes, ReactNode } from "react"
+import type { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode, TableHTMLAttributes } from "react"
 
 const cx = (...values: Array<string | undefined | false>) => values.filter(Boolean).join(" ")
 
 export function Panel({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <section className={cx("min-w-0 overflow-hidden rounded-lg border border-border bg-surface text-foreground", className)} {...props} />
+}
+
+export function ActionButton({ variant = "secondary", className, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "secondary" | "destructive" }) {
+  const variants = { primary: "border-primary bg-primary text-primary-foreground hover:opacity-90", secondary: "border-border bg-background text-foreground hover:bg-surface-subtle active:bg-secondary", destructive: "border-destructive bg-destructive text-white hover:opacity-90" }
+  return <button className={cx("inline-flex min-h-9 items-center justify-center gap-2 rounded-md border px-3 text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-45", variants[variant], className)} {...props} />
+}
+
+export function Field({ label, hint, error, className, ...props }: InputHTMLAttributes<HTMLInputElement> & { label: ReactNode; hint?: ReactNode; error?: ReactNode }) {
+  return <label className={cx("grid gap-1.5 text-sm font-semibold", error ? "text-destructive" : undefined, className)}>{label}<input aria-invalid={Boolean(error)} className="min-h-10 w-full rounded-md border border-input bg-background px-3 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50" {...props} />{error ? <span className="text-xs font-normal">{error}</span> : hint ? <span className="text-xs font-normal text-muted-foreground">{hint}</span> : null}</label>
+}
+
+export function DataTable({ className, ...props }: TableHTMLAttributes<HTMLTableElement>) {
+  return <div className="max-w-full overflow-x-auto"><table className={cx("w-full border-collapse text-sm text-foreground [&_th]:border-b [&_th]:border-border [&_th]:bg-surface-subtle [&_th]:px-3 [&_th]:py-2.5 [&_th]:text-left [&_th]:text-xs [&_th]:font-semibold [&_th]:text-muted-foreground [&_td]:border-b [&_td]:border-border [&_td]:px-3 [&_td]:py-3 [&_tbody_tr:last-child_td]:border-0", className)} {...props} /></div>
 }
 
 export function Metric({ label, value, detail, className }: { label: ReactNode; value: ReactNode; detail?: ReactNode; className?: string }) {
