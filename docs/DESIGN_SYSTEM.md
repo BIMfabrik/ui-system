@@ -55,6 +55,8 @@ The functional accent is `primary`. Individual applications may adjust its hue w
 
 Data-heavy applications should share the framework-neutral `bf-*` CSS contracts or install the `workspace-primitives` registry item. The common surface includes page headers, panels, metrics, buttons, segmented controls, fields, tables, status badges, alerts and loading/empty/error states. Keep domain-specific charts and visualisations in the consuming application.
 
+Runtime consumers that do not install the React registry may use `bf-theme-toggle` for the same compact System, Light and Dark selector exposed by the `theme-toggle` component.
+
 ## Theme behaviour
 
 Applications must offer System, Light and Dark modes. Persist an explicit selection, follow the OS preference in System mode and avoid a wrong-theme flash during loading.
