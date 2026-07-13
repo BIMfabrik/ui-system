@@ -16,6 +16,7 @@
     ".": "./styles/index.css",
     "./tokens.css": "./styles/tokens.css",
     "./base.css": "./styles/base.css",
+    "./components.css": "./styles/components.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {

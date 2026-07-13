@@ -70,6 +70,14 @@
       "docs": "Install this item before BIMfabrik components. Use semantic tokens rather than raw colours."
     },
     {
+      "name": "workspace-primitives",
+      "type": "registry:component",
+      "title": "Workspace Primitives",
+      "description": "Panels, metrics, statuses, segmented controls and data states for compact professional workspaces.",
+      "files": [{ "path": "registry/new-york/workspace-primitives/workspace-primitives.tsx", "type": "registry:component", "target": "@components/workspace-primitives.tsx" }],
+      "categories": ["data", "dashboard", "forms"]
+    },
+    {
       "name": "theme-provider",
       "type": "registry:component",
       "title": "Theme Provider",

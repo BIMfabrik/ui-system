@@ -51,6 +51,10 @@ Use standard shadcn semantic tokens plus:
 
 The functional accent is `primary`. Individual applications may adjust its hue while retaining the remaining neutral system.
 
+## Workspace primitives
+
+Data-heavy applications should share the framework-neutral `bf-*` CSS contracts or install the `workspace-primitives` registry item. The common surface includes page headers, panels, metrics, buttons, segmented controls, fields, tables, status badges, alerts and loading/empty/error states. Keep domain-specific charts and visualisations in the consuming application.
+
 ## Theme behaviour
 
 Applications must offer System, Light and Dark modes. Persist an explicit selection, follow the OS preference in System mode and avoid a wrong-theme flash during loading.

@@ -29,6 +29,7 @@ Or import only part of it:
 ```css
 @import "@bimfabrik/ui-theme/tokens.css";
 @import "@bimfabrik/ui-theme/base.css";
+@import "@bimfabrik/ui-theme/components.css";
 ```
 
 Dark mode works with either `.dark` or `data-theme="dark"` on an ancestor, normally the `html` element.
@@ -92,5 +93,6 @@ npm run dev
 - `app-shell` — responsive workspace shell
 - `source-note` — source and data-status metadata
 - `map-toolbar` — compact GIS/map action toolbar
+- `workspace-primitives` — panels, metrics, statuses, segmented controls and data states
 
 See `docs/DESIGN_SYSTEM.md` and `AGENTS.md` before adding or changing components.
