@@ -17,7 +17,7 @@ type ThemeToggleProps = {
   variant?: ThemeToggleVariant
 }
 
-export function ThemeToggle({ className = "", variant = "segmented" }: ThemeToggleProps) {
+export function ThemeToggle({ className = "", variant = "icon" }: ThemeToggleProps) {
   const { theme, resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
 
