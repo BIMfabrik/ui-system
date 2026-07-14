@@ -62,6 +62,20 @@ npx shadcn@latest add BIMfabrik/ui-system/page-header
 
 The public GitHub repository is the shadcn registry. It does not require a separate registry server.
 
+### Theme toggle variants
+
+The compact animated sun/moon control is the default and is intended for application headers:
+
+```tsx
+<ThemeToggle />
+```
+
+Use the segmented variant where users need an explicit System, Light and Dark selector:
+
+```tsx
+<ThemeToggle variant="segmented" />
+```
+
 ## Inspect and validate
 
 ```bash
@@ -88,7 +102,7 @@ npm run dev
 
 - `bimfabrik-theme` — semantic light/dark design tokens
 - `theme-provider` — system/light/dark theme provider
-- `theme-toggle` — accessible three-state theme control
+- `theme-toggle` — compact icon toggle with an optional three-state segmented variant
 - `page-header` — compact application page heading
 - `app-shell` — responsive workspace shell
 - `source-note` — source and data-status metadata
