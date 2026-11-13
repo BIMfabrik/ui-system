@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <!-- Sample only. Replace these labels with real settings and bind values in app code. -->
+    <ui:Style src="/Packages/com.zree.ui/Runtime/Styles/ZreeTheme.uss" />
+    <ui:Style src="/Packages/com.zree.ui/Runtime/Styles/ZreeComponents.uss" />
+    <ui:VisualElement name="sample-settings" class="ds-root ds-dark zree-ui">
+        <ui:VisualElement name="sample-graphics" class="zree-section">
+            <ui:Label name="sample-graphics-heading" text="DISPLAY" class="zree-section__heading" />
+            <ui:Toggle name="sample-shadows" label="Shadows" value="true" class="zree-setting-toggle" />
+            <ui:Slider name="sample-brightness" label="Brightness" low-value="0" high-value="1" value="0.5" class="zree-setting-slider" />
+            <ui:Button name="sample-apply" text="Apply" class="zree-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
