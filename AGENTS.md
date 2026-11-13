@@ -52,3 +52,14 @@ create separate QA apps or add cosmetic approval waterfalls.
 
 Run `python3 -m unittest discover -s tests -p 'test_designctl.py' -v`
 for changes to the cross-platform token generator and its contract.
+
+## Unity UPM package authority
+
+`unity/com.zree.ui` owns the shared ZREE Unity styles and settings components.
+`design/zree.json` owns canonical palette and metrics;
+`scripts/export_unity_package.py` generates both Unity token assets. Keep new
+UI controls scoped with `zree-*` classes; do not modify `settings-*` or `hud-*`
+style selectors in product repos from this package. Do not copy/paste the entire
+package into each game. Respect Unity .meta GUID stability, native input and
+verified Apple display behavior. Test with both the package static tests and the
+real app's Unity import/compile before shipping consumer updates.

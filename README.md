@@ -134,3 +134,20 @@ game HUD integration, safety constraints and versioned cross-repo update PRs.
 **Important:** generated tokens do not automatically replace existing game
 prefabs, native Xcode views or website product content. Enroll and bind each
 consumer once, then release-triggered sync PRs can keep shared styling current.
+
+## Unity: reusable native game UI
+
+The source of truth for ZREE Unity UI components is the versioned UPM package
+[`unity/com.zree.ui`](unity/com.zree.ui/README.md). Install it from a pinned Git
+tag via `?path=/unity/com.zree.ui#zree-ui-vX.Y.Z`. It provides shared UI Toolkit
+settings factories, UXML/USS classes, tokens and a design validator. Token output
+is generated from `design/zree.json` with:
+
+```bash
+python3 scripts/export_unity_package.py --check
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+Unity Assistant uses each game's checked-in Custom Instructions asset; the gameplay
+repository owns its own Unity ProjectSettings GUID and runtime bindings. See
+[`docs/UNIFIED_DESIGN_AUTOMATION.md`](docs/UNIFIED_DESIGN_AUTOMATION.md).

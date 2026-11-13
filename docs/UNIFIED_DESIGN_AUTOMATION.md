@@ -16,7 +16,7 @@ An implementation agent receiving **"Create <product> using the UI system"** sho
 
 1. Inspect the exact product brief and relevant existing repo/assets before creating anything; honor the one-product/one-project rule.
 2. Reuse the established BIMfabrik or ZREE identity, never fabricate a new generic AI theme. Run `designctl init` for the **actual** product repository/platform.
-3. For a new game, use shared game HUD metrics/components for pause, mission, compass, minimap and tool affordances. Keep the game's own physics, gameplay bindings, camera and hit regions. The script creates tokens, not a running Unity app or prefab automatically.
+3. For a new game, install the pinned `com.zree.ui` UPM package from `unity/com.zree.ui`, and use shared game HUD metrics/components for pause, mission, compass, minimap and tool affordances. Keep the game's own physics, gameplay bindings, camera and hit regions. The script creates tokens, not a running Unity app or prefab automatically.
 4. For a public product, create or update a product website in its *existing* hosting/repository workflow (`BIMfabrik/zree_web` for ZREE products), using real screenshots, support links, legal/privacy URLs and verified store links. Do not invent features, reviews, prices, metrics or an App Store link.
 5. Connect the generated tokens to the real UI components. Test the real build at appropriate device sizes and compare the intended experience with the original. A generated palette alone is not a finished interface.
 6. Commit product-specific implementation and produce the appropriate real-app TestFlight/web preview for owner visual acceptance. Do not create separate QA iOS apps.
@@ -38,8 +38,10 @@ Requires Python 3.10+ only (standard library). From a checkout of this repositor
 # New or existing native app: adds design config + generated SwiftUI colors
 python3 scripts/designctl.py init --root ../turemi --name Turemi --brand zree --platform swiftui --surface app
 
-# Game: adds Unity C# palette plus UI Toolkit USS. Existing UGUI prefabs are not replaced.
-python3 scripts/designctl.py init --root ../bad_buggies --name 'Bad Buggies' --brand zree --platform unity --surface game
+# For Unity 6, install the pinned `com.zree.ui` UPM package from `unity/com.zree.ui`
+# instead of generating a separate local copy of its C# tokens/USS.
+# The legacy designctl Unity token export remains available for projects that
+# do not yet consume the UPM package. Do not use both in one game.
 
 # Existing professional web application
 python3 scripts/designctl.py init --root ../some-web-app --name 'Workspace' --brand bimfabrik --platform web --surface app
@@ -60,7 +62,7 @@ Do not run `init` if `.ui-system.json` already exists. Hand-edited app UI, scene
 |---|---|---|
 | React, static web | `ui-system/generated/theme.css` | Load CSS, set `<html data-ds-brand="...">`, use `var(--ds-*)`; keep semantic HTML, layout and copy product-owned |
 | SwiftUI | `DesignSystem/Generated/CorporateDesignTokens.swift` | Add to the app's Xcode target or Swift package; use colors in brand-specific elements; use native system controls where appropriate |
-| Unity | `Assets/ZreeUI/Generated/CorporateDesignTokens.cs` and `.uss` | Commit Unity-created `.meta` files once and bind C# colors to actual UGUI/HUD controls or USS to UI Toolkit; never silently replace scene/prefab GUIDs |
+| Unity (preferred) | Git-pinned `com.zree.ui`: `Runtime/Scripts` and `Runtime/Styles` | Reuse package controls/UXML/USS; add project-owned Unity Assistant instructions, bind real gameplay, preserve scene/prefab GUIDs. Legacy standalone `designctl` output is for non-UPM consumers only |
 | Godot | `addons/zree_ui/generated/design_tokens.json` | Load JSON into a real Godot Theme/Control adapter, without changing gameplay |
 
 ### HUD contract
@@ -75,7 +77,7 @@ Every public product page should provide a useful introduction, authentic app/ga
 
 A central release can notify enrolled repositories after an adapter is installed. This is a release-driven code workflow, **not an hourly chatbot/watchdog**.
 
-1. Enroll each consuming project with `.ui-system.json`, check in its generated files, integrate its visual components and install `templates/github/workflows/ui-system-consumer-sync.yml` as `.github/workflows/ui-system-consumer-sync.yml`.
+1. Enroll each non-UPM consuming project with `.ui-system.json`, check in its generated files, integrate its visual components and install `templates/github/workflows/ui-system-consumer-sync.yml` as `.github/workflows/ui-system-consumer-sync.yml`.
 2. Mark that project enabled in `design/consumers.json` after the first successful sync/real-app check. Do not pre-enable projects that have not been integrated.
 3. Configure the upstream `UI_SYNC_TOKEN` **repository secret** with the least cross-repo permissions required to dispatch to enrolled repositories; this must be done through a GitHub App token or another approved credential. Do not place credentials in source.
 4. Publish a tagged UI-system release. `.github/workflows/dispatch-consumers.yml` sends `repository_dispatch` events to enabled consumers. The receiver checks out the **tagged** design source and opens a deterministic token-update PR.
@@ -93,3 +95,22 @@ The receiver requires the consuming repo's GitHub Actions setting permitting the
 ## Existing deployment limits
 
 This foundation is an **implementation aid**, not a one-command compiler, store submission tool, or autonomous refactoring engine. Wiring real React/SwiftUI/Unity/Godot components and consumer workflow installation is a project-by-project integration step. Until a consumer has that integration, changing `design/zree.json` cannot physically update its HUD or website. Avoid claiming otherwise.
+
+## Unity-specific first-party package
+
+New Unity 6 consumers use `unity/com.zree.ui` as a UPM Git dependency pinned
+to an immutable tag or commit. `python3 scripts/export_unity_package.py`
+regenerates the package's C# palette and USS variables from the canonical
+brand. The package contains scoped `zree-*` components and editor checks,
+not game-owned UI compositions or live gameplay bindings.
+
+The Unity Assistant's Custom Instructions reference is stored in
+`ProjectSettings/Packages/com.unity.ai.assistant/Settings.json` by the
+`CustomInstructionsGUID` field. Each consuming game keeps a concise tracked
+TextAsset with that GUID. Installers must not replace nonempty existing
+project-specific instructions or other settings. Agents also read project
+`AGENTS.md`, which references the UPM package contract.
+
+UPM upgrades are intentionally version-pinned PRs, not blind replacement of
+serialized HUD assets. The release dispatcher for `designctl` does not upgrade
+UPM manifest dependencies until a dedicated version-bump receiver is enrolled.

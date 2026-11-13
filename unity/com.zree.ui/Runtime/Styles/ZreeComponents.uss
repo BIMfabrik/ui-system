@@ -1,0 +1,57 @@
+/* ZREE UI Toolkit primitives. Always load ZreeTheme.uss before this sheet.
+   Only zree-* selectors: never silently restyle existing gameplay HUD elements. */
+.zree-ui {
+    color: var(--ds-foreground, #f4f7f0);
+}
+.zree-section {
+    flex-direction: column;
+    flex-shrink: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.zree-section__heading {
+    margin-bottom: 8px;
+    font-size: 14px;
+    -unity-font-style: bold;
+    color: var(--ds-muted-foreground, #cedac7);
+}
+.zree-setting-toggle,
+.zree-setting-slider {
+    flex-shrink: 0;
+    min-height: 56px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: var(--ds-border, #526258);
+    background-color: var(--ds-surface, #203b30);
+    color: var(--ds-foreground, #f4f7f0);
+}
+.zree-setting-toggle:focus,
+.zree-setting-slider:focus {
+    border-color: var(--ds-accent, #d4efab);
+    border-width: 2px;
+}
+.zree-button {
+    min-height: 56px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: var(--ds-primary, #d4efab);
+    color: var(--ds-primary-foreground, #1c3022);
+    border-width: 1px;
+    border-color: var(--ds-border, #526258);
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+}
+.zree-button:hover {
+    background-color: var(--ds-accent, #d4efab);
+}
+.zree-button:focus {
+    border-color: var(--ds-foreground, #f4f7f0);
+    border-width: 2px;
+}
+.zree-button:disabled,
+.zree-setting-toggle:disabled,
+.zree-setting-slider:disabled {
+    opacity: 0.45;
+}
