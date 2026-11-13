@@ -34,3 +34,21 @@ Interactive components must account for default, hover, focus-visible, active, d
 ## Release discipline
 
 Prefer additive changes. For breaking changes, document migration instructions and tag a release so downstream applications can pin registry dependencies.
+
+## Cross-platform products and visual identity
+
+For app, website or game-HUD creation/redesign, read
+`docs/UNIFIED_DESIGN_AUTOMATION.md` and use the existing design profiles
+instead of inventing an unrelated, generic UI theme. BIMfabrik professional
+colors remain governed by `styles/tokens.css`. ZREE colors originate from
+`design/zree.json` and the existing ZREE corporate website.
+
+Generated adapter files are strictly token surfaces; never assume token
+sync automatically redesigns product-owned SwiftUI screens, Unity prefabs,
+Godot scenes or website copy. Maintain Apple-native interaction conventions,
+true gameplay bindings, readable mobile layouts and visual consistency.
+Publish design changes via reviewable source-pinned consumer PRs. Do not
+create separate QA apps or add cosmetic approval waterfalls.
+
+Run `python3 -m unittest discover -s tests -p 'test_designctl.py' -v`
+for changes to the cross-platform token generator and its contract.

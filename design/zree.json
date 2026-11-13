@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "brand": "zree",
+  "source": "BIMfabrik/zree_web/assets/styles.css (ZREE corporate website, 2026-10-25)",
+  "logoSource": "BIMfabrik/zree_web/assets/zree-mark.svg",
+  "colorModes": {
+    "light": {
+      "background": "#f4f5ef",
+      "foreground": "#1b2d25",
+      "surface": "#ffffff",
+      "surface-subtle": "#edf0e7",
+      "primary": "#203b30",
+      "primary-foreground": "#f5f7ee",
+      "accent": "#d4efab",
+      "accent-foreground": "#1c3022",
+      "border": "#d5dcd1",
+      "muted-foreground": "#526258",
+      "success": "#357047",
+      "warning": "#99641b",
+      "destructive": "#b03632"
+    },
+    "dark": {
+      "background": "#0e1512",
+      "foreground": "#f4f7f0",
+      "surface": "#203b30",
+      "surface-subtle": "#1b2d25",
+      "primary": "#d4efab",
+      "primary-foreground": "#1c3022",
+      "accent": "#d4efab",
+      "accent-foreground": "#1c3022",
+      "border": "#526258",
+      "muted-foreground": "#cedac7",
+      "success": "#9bd99c",
+      "warning": "#ffd18a",
+      "destructive": "#ff8b85"
+    }
+  },
+  "typography": {
+    "body": "-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif",
+    "display": "Georgia, Times New Roman, serif"
+  },
+  "metrics": {
+    "cornerRadius": 8,
+    "spacingUnit": 4,
+    "minimumTouchTarget": 44,
+    "childGameTouchTarget": 56,
+    "fastMotionMs": 150
+  },
+  "gameHud": {
+    "slots": ["pause", "mission-progress", "minimap", "compass", "speed", "vehicle-tools", "touch-controls"],
+    "rules": [
+      "Keep mission, map and driving controls unobstructed within the actual device safe area.",
+      "Show only tools supported by the equipped vehicle or current game mode.",
+      "Scale and place gameplay touch controls by action importance rather than reusing website buttons.",
+      "Game-specific silhouettes and approved art remain product-owned; share themes and interaction behavior."
+    ]
+  }
+}

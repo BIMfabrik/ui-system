@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "enabledRepositories": [],
+  "plannedRepositories": [
+    "BIMfabrik/zree_web",
+    "BIMfabrik/turemi",
+    "BIMfabrik/bad_buggies",
+    "BIMfabrik/scargada",
+    "BIMfabrik/music_wheel",
+    "BIMfabrik/kreuzwelt",
+    "BIMfabrik/wakeski",
+    "BIMfabrik/hozak"
+  ],
+  "comment": "Only move a repo to enabledRepositories after installing the receiver, connecting actual UI components and verifying a full sync."
+}

@@ -1,0 +1,62 @@
+# Copy into an enrolled product repo at .github/workflows/ui-system-consumer-sync.yml.
+# Keep this receiver alongside the product's normal build/release checks.
+name: Sync corporate design tokens
+
+on:
+  repository_dispatch:
+    types: [ui-system-release]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'UI system release tag'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ui-system-design-sync
+  cancel-in-progress: false
+
+jobs:
+  design-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify consumer enrollment
+        run: test -f .ui-system.json
+      - name: Checkout design system source
+        uses: actions/checkout@v4
+        with:
+          repository: BIMfabrik/ui-system
+          ref: ${{ github.event.client_payload.ref || inputs.ref || 'main' }}
+          path: .ui-system-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Sync managed tokens only
+        run: |
+          python3 .ui-system-source/scripts/designctl.py sync --root .
+          rm -rf .ui-system-source
+      - name: Open targeted update PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/ui-system-sync
+          delete-branch: true
+          commit-message: 'chore(ui): sync corporate design tokens'
+          title: 'chore(ui): sync approved corporate design tokens'
+          body: |
+            Token-only update from BIMfabrik/ui-system.
+            Verify real app/site integration, safe areas and the affected UI before merging.
+            This PR does not replace gameplay HUD prefabs, page layouts or custom product content.
+          add-paths: |
+            .ui-system.lock.json
+            ui-system/generated/**
+            Assets/ZreeUI/Generated/**
+            DesignSystem/Generated/**
+            addons/zree_ui/generated/**

@@ -4,3 +4,7 @@ out
 public/r
 *.log
 .DS_Store
+
+# Python token generator tests
+__pycache__/
+*.pyc
