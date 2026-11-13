@@ -14,6 +14,15 @@ SCRIPTS = ROOT / "scripts"
 
 
 class UnityPackageTests(unittest.TestCase):
+    def test_immutable_upm_root_assets_have_metas(self):
+        for name, importer in (
+            ("package.json", "PackageManifestImporter"),
+            ("README.md", "TextScriptImporter"),
+        ):
+            target = PKG / (name + ".meta")
+            self.assertTrue(target.is_file(), f"UPM root asset needs a meta: {name}")
+            self.assertIn(importer + ":", target.read_text())
+
     def test_manifest_valid_and_unity_6(self):
         data = json.loads((PKG / "package.json").read_text())
         self.assertEqual(data["name"], "com.zree.ui")

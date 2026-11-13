@@ -1,13 +1,20 @@
 {
   "name": "com.zree.ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Zree UI Toolkit",
   "description": "Brand-consistent, accessible UI Toolkit settings and HUD primitives for Zree games. Source of truth: BIMfabrik/ui-system.",
   "unity": "6000.0",
   "author": {
     "name": "Zree GmbH"
   },
-  "keywords": ["zree", "ui", "ui-toolkit", "design-system", "settings", "hud"],
+  "keywords": [
+    "zree",
+    "ui",
+    "ui-toolkit",
+    "design-system",
+    "settings",
+    "hud"
+  ],
   "samples": [
     {
       "displayName": "Settings Section",
