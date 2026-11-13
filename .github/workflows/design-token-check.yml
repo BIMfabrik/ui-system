@@ -1,0 +1,31 @@
+name: Design protocol checks
+
+on:
+  push:
+    paths:
+      - 'scripts/designctl.py'
+      - 'design/**'
+      - 'styles/tokens.css'
+      - 'tests/test_designctl.py'
+      - '.github/workflows/design-token-check.yml'
+  pull_request:
+    paths:
+      - 'scripts/designctl.py'
+      - 'design/**'
+      - 'styles/tokens.css'
+      - 'tests/test_designctl.py'
+      - '.github/workflows/design-token-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 -m unittest discover -s tests -p 'test_designctl.py' -v
+      - run: python3 -m compileall -q scripts/designctl.py

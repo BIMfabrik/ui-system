@@ -110,3 +110,27 @@ npm run dev
 - `workspace-primitives` — panels, metrics, statuses, segmented controls and data states
 
 See `docs/DESIGN_SYSTEM.md` and `AGENTS.md` before adding or changing components.
+
+## Cross-platform corporate design automation
+
+The existing CSS/shadcn package remains the web design authority. A portable identity
+layer now supports ZREE's actual corporate colors and generates **managed design tokens**
+for React/web, SwiftUI, Unity (C#/USS), and Godot. The consumer's app/UI code stays owned
+by its repository.
+
+Start with:
+
+```bash
+python3 scripts/designctl.py init --root ../your-app --name 'Your app' --brand zree --platform unity --surface game
+python3 scripts/designctl.py sync --root ../your-app --check
+```
+
+Use `--platform swiftui`, `web` or `godot`; use
+`--surface product-site --platform web` for an editable sales/support page
+starter. Consult [Unified design automation](docs/UNIFIED_DESIGN_AUTOMATION.md)
+for natural-language creation/redesign workflows, Apple design requirements,
+game HUD integration, safety constraints and versioned cross-repo update PRs.
+
+**Important:** generated tokens do not automatically replace existing game
+prefabs, native Xcode views or website product content. Enroll and bind each
+consumer once, then release-triggered sync PRs can keep shared styling current.
