@@ -30,7 +30,7 @@ an unpinned mutable branch in release projects.
 
 Bind controls to real app state. Add the shared style references **before** the
 game's local USS so local exceptions remain possible. Keep existing element names.
-Use `Zree.UI.ZreeSettings` when creating sections dynamically; it produces the
+For a reusable UI Builder section shell, instantiate `Runtime/Templates/ZreeSettingsSection.uxml`, rename the section and bind its controls. Use `Zree.UI.ZreeSettings` when creating sections dynamically; it produces the
 same classes and named controls as UXML.
 
 The brand palette is generated from `design/zree.json` by

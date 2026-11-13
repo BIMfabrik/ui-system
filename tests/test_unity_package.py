@@ -57,6 +57,20 @@ class UnityPackageTests(unittest.TestCase):
         self.assertIn("/Packages/com.zree.ui/Runtime/Styles/ZreeComponents.uss", refs)
         self.assertTrue(root.find(".//" + ns + "Toggle") is not None)
 
+    def test_hidden_package_dirs_have_no_metas(self):
+        # Unity excludes tilde folders from asset import; their .meta files cause warnings.
+        self.assertFalse((PKG / "Documentation~.meta").exists())
+        self.assertFalse((PKG / "Samples~.meta").exists())
+        self.assertFalse(any((PKG / "Documentation~").rglob("*.meta")))
+        self.assertFalse(any((PKG / "Samples~").rglob("*.meta")))
+
+    def test_reusable_settings_section_template(self):
+        path = PKG / "Runtime" / "Templates" / "ZreeSettingsSection.uxml"
+        self.assertTrue(path.is_file())
+        self.assertTrue(Path(str(path) + ".meta").is_file())
+        root = ET.parse(path).getroot()
+        self.assertTrue(root.find(".//{UnityEngine.UIElements}VisualElement") is not None)
+
     def test_editor_only_references_do_not_leak_into_runtime(self):
         runtime = (PKG / "Runtime" / "Scripts" / "ZreeSettings.cs").read_text()
         self.assertNotIn("using UnityEditor;", runtime)

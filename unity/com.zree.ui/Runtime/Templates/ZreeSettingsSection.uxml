@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <!-- Reusable section shell; rename the section and bind actual game controls. -->
+    <ui:Style src="/Packages/com.zree.ui/Runtime/Styles/ZreeTheme.uss" />
+    <ui:Style src="/Packages/com.zree.ui/Runtime/Styles/ZreeComponents.uss" />
+    <ui:VisualElement name="zree-section-template" class="zree-section">
+        <ui:Label name="zree-section-title" text="SECTION" class="zree-section__heading" />
+    </ui:VisualElement>
+</ui:UXML>
