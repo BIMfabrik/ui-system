@@ -57,6 +57,15 @@ class UnityPackageTests(unittest.TestCase):
         self.assertIn("/Packages/com.zree.ui/Runtime/Styles/ZreeComponents.uss", refs)
         self.assertTrue(root.find(".//" + ns + "Toggle") is not None)
 
+    def test_shared_latest_refresher(self):
+        code = (PKG / "Editor" / "ZreeLatestPackageRefresh.cs").read_text()
+        self.assertIn("MenuItem(\"Zree/Packages/Refresh Latest Shared Packages\")", code)
+        self.assertIn("Client.Add(next)", code)
+        self.assertIn("if (name == \"com.zree.ui\")", code)
+        self.assertIn("else others.Add(url)", code)
+        self.assertIn("#main", code)
+        self.assertTrue((PKG / "Editor" / "ZreeLatestPackageRefresh.cs.meta").is_file())
+
     def test_hidden_package_dirs_have_no_metas(self):
         # Unity excludes tilde folders from asset import; their .meta files cause warnings.
         self.assertFalse((PKG / "Documentation~.meta").exists())

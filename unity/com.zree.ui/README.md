@@ -6,14 +6,18 @@ Game-specific HUD layout, panel binding, localization, input and persistence rem
 
 ## Install
 
-Use a pinned immutable Git tag (replace VERSION with an existing release tag):
+Use the moving main branch; the Unity lock records the exact resolved Git commit:
 
 ```json
-"com.zree.ui": "https://github.com/BIMfabrik/ui-system.git?path=/unity/com.zree.ui#VERSION"
+"com.zree.ui": "https://github.com/BIMfabrik/ui-system.git?path=/unity/com.zree.ui#main"
 ```
 
-Git dependency paths and tags are supported by Unity Package Manager. Never install from
-an unpinned mutable branch in release projects.
+Unity retains a resolved commit in Packages/packages-lock.json even for moving main.
+Select Zree > Packages > Refresh Latest Shared Packages in the Unity Editor
+before a new development or build milestone to re-add each main-branch ZREE
+Git dependency using Package Manager. This updates com.zree.ui last and
+leaves local/embedded asset packages untouched. Keep exact resolved hashes
+as release evidence; do not disable the Unity package lock.
 
 ## Use in UXML / UI Builder
 
@@ -51,4 +55,4 @@ The package does not modify Unity Assistant preferences on install.
 Component styles are prefixed `zree-*`, never `settings-*` or `hud-*`.
 Installing the package does **not** recolor old games or change their serialized
 bindings. A consumer adds an explicit stylesheet and root class first; then it
-opts into shared components as features are built. Pin tags; use PRs for upgrades.
+opts into shared components as features are built. Use reviewed commits on shared main branches, refresh in consumer games and verify imports before shipping.
